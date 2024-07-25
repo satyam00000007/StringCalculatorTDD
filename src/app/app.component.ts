@@ -8,5 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   title = 'String Calculator TDD'; 
-  
+  input:any = '';
+  result: number | string = '';
+
+  calculate(){
+    this.result = this.input;
+  }
 }

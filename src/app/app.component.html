@@ -5,4 +5,9 @@
       <li>For custom delimiter use "//[delimiter]\n[numbers…]" pattern. The begining of String will will contain double foeward slashes with delimiter and next line will contain the numbers with new delimiter.</li>
       <li>Negative numbers are not allowed.</li>
     </ul>
+    <textarea type="text" [(ngModel)]="input" placeholder="Enter numbers"></textarea>
+    <button (click)="calculate()">Calculate</button>
+    <div class="result">
+      Result: {{ result }}
+    </div>
 </div>
