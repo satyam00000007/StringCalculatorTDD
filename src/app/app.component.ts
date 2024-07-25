@@ -15,6 +15,13 @@ export class AppComponent {
   result: number | string = '';
 
   calculate(){
-    this.result = this.input;
+    this.stringCalcService.add(this.input).subscribe({
+      next:(res:any)=>{
+        this.result = res;
+      },
+      error:(err) => {
+        this.result = err.message;
+      }}
+    )
   }
 }

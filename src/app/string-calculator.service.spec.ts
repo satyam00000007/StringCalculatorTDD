@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-
 import { StringCalculatorService } from './string-calculator.service';
+import { of } from 'rxjs';
 
 describe('StringCalculatorService', () => {
   let service: StringCalculatorService;
@@ -10,7 +10,15 @@ describe('StringCalculatorService', () => {
     service = TestBed.inject(StringCalculatorService);
   });
 
-  it('should be created', () => {
+  it('should be created StringCalculatorService', () => {
     expect(service).toBeTruthy();
+  });
+
+  describe('add', () => {
+    it('should return 0 for an empty string', () => {
+      service.add('').subscribe((res)=>{
+        expect(res).toBe(0)
+      }); 
+    });
   });
 });
