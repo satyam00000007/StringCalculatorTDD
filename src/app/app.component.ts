@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StringCalculatorService } from './string-calculator.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  constructor(private stringCalcService : StringCalculatorService){  }
 
   title = 'String Calculator TDD'; 
   input:any = '';
