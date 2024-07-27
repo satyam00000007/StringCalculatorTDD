@@ -20,5 +20,11 @@ describe('StringCalculatorService', () => {
         expect(res).toBe(0)
       }); 
     });
+
+    it('should return the same number for all individual numbers', () => {
+      service.add('5').subscribe((res)=>{
+        expect(res).toBe(5)
+      }); 
+    });
   });
 });
