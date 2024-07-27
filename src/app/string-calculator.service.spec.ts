@@ -32,5 +32,11 @@ describe('StringCalculatorService', () => {
         expect(res).toBe(6)
       }); 
     });
+
+    it('should return the sum of comma-separated numbers with white-space', () => {
+      service.add('1,2,3').subscribe((res)=>{
+        expect(res).toBe(6)
+      }); 
+    });
   });
 });
