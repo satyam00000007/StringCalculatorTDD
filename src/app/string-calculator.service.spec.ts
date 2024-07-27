@@ -26,5 +26,11 @@ describe('StringCalculatorService', () => {
         expect(res).toBe(5)
       }); 
     });
+
+    it('should return the sum of comma-separated numbers', () => {
+      service.add('1,2,3').subscribe((res)=>{
+        expect(res).toBe(6)
+      }); 
+    });
   });
 });

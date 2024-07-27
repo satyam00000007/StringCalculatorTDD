@@ -12,7 +12,12 @@ export class StringCalculatorService {
     if (!numbers) {
       return of(0);
     }
-    return of(Number(numbers));
+
+    let delimiters = [','];
+
+    let nums = numbers.split(new RegExp(`[${delimiters.join('')}]`)).map(num => num?parseFloat(num):0);
+    const total = nums.reduce((sum, num) => sum + num, 0)
+    return of(Number(total));
     
   }
 }
