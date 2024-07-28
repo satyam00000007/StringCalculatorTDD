@@ -172,5 +172,14 @@ describe('StringCalculatorService', () => {
       });
     });
 
+    it('should throw an error for negative numbers used with custom delimeters', () => {
+      service.add('//;\n1;-2;3').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('negative numbers not allowed: -2');
+        }
+      });
+    });
+
   });
 });
