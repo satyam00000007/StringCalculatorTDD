@@ -50,6 +50,11 @@ export class StringCalculatorService {
     if(negativeValues){
       return throwError(()=> new Error(`negative numbers not allowed: ${negativeValues}`));
     }
+    
+    if(this.checkValidNumber(numbers,delimiters)){
+      return throwError(()=> new Error(`Enter Valid Number`));
+    }
+    
     const total = this.NumberHandler(numbers,delimiters)
     return of(total);
     
@@ -97,6 +102,12 @@ export class StringCalculatorService {
       });
 
     return negativeValues
+  }
+
+  checkValidNumber(numbers:string,delimiters:string[]):boolean{
+
+    let nums = numbers.split(new RegExp(`[${delimiters.join('')}]`)).filter((num)=> ((isNaN(parseInt(num, 10))) || (eval(num) != num)));
+    return nums.length?true:false;
   }
 
 }

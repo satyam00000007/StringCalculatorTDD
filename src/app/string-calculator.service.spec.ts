@@ -190,6 +190,23 @@ describe('StringCalculatorService', () => {
       });
     });
 
+    it('should throw an error for invalid numbers', () => {
+      service.add('&').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('Enter Valid Number');
+        }
+      });
+    });
+
+    it('should throw an error for Algebraic expression not containing negative number', () => {
+      service.add('3 + 6 * 7').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('Enter Valid Number');
+        }
+      });
+    });
 
   });
 });
