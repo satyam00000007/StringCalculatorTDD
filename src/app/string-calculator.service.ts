@@ -29,6 +29,9 @@ export class StringCalculatorService {
       
       const parts = numbers.split(regex);
       const customDelimiter = parts[0].substring(2,parts[0].length);
+      if(!(customDelimiter) || customDelimiter.charCodeAt(0) == 45){
+        return throwError(()=> new Error(`Use Custom Delimiter other than "," ,"-", "Numbers" and "\n".`));
+      }
 
       delimiters.push(customDelimiter);
 

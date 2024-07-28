@@ -99,5 +99,42 @@ describe('StringCalculatorService', () => {
       });
     });
 
+    it('should throw an error if custom delimiter is a number', () => {
+      service.add('//1\n1;2;3').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('Use Custom Delimiter other than "," ,"-", "Numbers" and "\n".');
+        }
+      });
+    });
+
+
+    it('should throw an error if custom delimiter is a ","', () => {
+      service.add('//,\n1;2;3').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('Use Custom Delimiter other than "," ,"-", "Numbers" and "\n".');
+        }
+      });
+    });
+
+    it('should throw an error if misplaced \\n in custom delimiter', () => {
+      service.add('//;1;4;4').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('Use Correct Custom Delimiter\'s Format');
+        }
+      });
+    });
+
+    it('should throw an error if custom delimiter is a "-"', () => {
+      service.add('//-\n1;2;3').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('Use Custom Delimiter other than "," ,"-", "Numbers" and "\n".');
+        }
+      });
+    });
+
   });
 });
