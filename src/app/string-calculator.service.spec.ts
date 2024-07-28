@@ -84,10 +84,19 @@ describe('StringCalculatorService', () => {
       }); 
     });
 
-    it('Custom delimeter should return the sum of numbers seperated by custom delemeters', () => {
+    it('custom delimeter should return the sum of numbers seperated by custom delemeters', () => {
       service.add('//;\n1;4;4').subscribe((res)=>{
         expect(res).toBe('9')
       }); 
+    });
+
+    it('should throw an error if misplaced \\n in custom delimiter', () => {
+      service.add('//;1;4;4').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('Use Correct Custom Delimiter\'s Format');
+        }
+      });
     });
 
   });

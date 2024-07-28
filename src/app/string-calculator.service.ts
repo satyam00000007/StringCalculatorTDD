@@ -20,10 +20,14 @@ export class StringCalculatorService {
     // Custom Delimeter
     if (numbers.startsWith('//')) {
 
+      if(!(numbers.includes("\n"))){
+        return throwError (()=>new Error(`Use Correct Custom Delimiter's Format`));
+      }
+
       // check for other symbols used for delimiter
       const regex = /[\n,.\d]+/;
+      
       const parts = numbers.split(regex);
-
       const customDelimiter = parts[0].substring(2,parts[0].length);
 
       delimiters.push(customDelimiter);
@@ -63,5 +67,6 @@ export class StringCalculatorService {
     }
 
     return total;
-}
+  }
+
 }
