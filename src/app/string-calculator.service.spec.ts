@@ -154,5 +154,14 @@ describe('StringCalculatorService', () => {
       });
     });
 
+    it('should throw an error for negative numbers seprated by commas', () => {
+      service.add('-1,-2').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('negative numbers not allowed: -1, -2');
+        }
+      });
+    });
+
   });
 });
