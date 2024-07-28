@@ -84,8 +84,11 @@ describe('StringCalculatorService', () => {
       }); 
     });
 
-
-
+    it('Custom delimeter should return the sum of numbers seperated by custom delemeters', () => {
+      service.add('//;\n1;4;4').subscribe((res)=>{
+        expect(res).toBe('9')
+      }); 
+    });
 
   });
 });
