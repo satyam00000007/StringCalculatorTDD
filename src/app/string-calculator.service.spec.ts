@@ -181,5 +181,15 @@ describe('StringCalculatorService', () => {
       });
     });
 
+    it('should throw an error for negative numbers paased after a positive number without any delimeter', () => {
+      service.add('1-3').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('negative numbers not allowed: -3');
+        }
+      });
+    });
+
+
   });
 });

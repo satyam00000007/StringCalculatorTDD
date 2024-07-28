@@ -29,7 +29,6 @@ export class StringCalculatorService {
       
       const parts = numbers.split(regex);
       const customDelimiter = parts[0].substring(2,parts[0].length);
-      console.log(customDelimiter)
       if(!(customDelimiter) || customDelimiter.charCodeAt(0) == 45){
         return throwError(()=> new Error(`Use Custom Delimiter other than "," ,"-", "Numbers" and "\n".`));
       }
@@ -51,7 +50,6 @@ export class StringCalculatorService {
     if(negativeValues){
       return throwError(()=> new Error(`negative numbers not allowed: ${negativeValues}`));
     }
-
     const total = this.NumberHandler(numbers,delimiters)
     return of(total);
     
@@ -90,10 +88,9 @@ export class StringCalculatorService {
       let nums = str.split(new RegExp(`[${delimiters.join('')}]`)).map((num)=> {
         if(num.includes('-')){
           let newValues = num.split('-')
-                      .map((val)=> val?"-"+val:'')
+                      .map((val,idx)=>(idx == 0 && val != '')? '': (val?"-"+val:''))
                       .filter((val)=> Number(val) < 0)
                       .join(", ");
-
           negativeValues = negativeValues?negativeValues + ', '+newValues : newValues;          
         }
         return 0;
