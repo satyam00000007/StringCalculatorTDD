@@ -36,6 +36,12 @@
   .calculator .result {
     margin-top: 10px;
     font-size: 1.2em;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .calculator .result .resultValue{
+    word-break: break-all;
+    text-align: left;
   }
   
