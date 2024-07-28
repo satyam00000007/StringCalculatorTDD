@@ -13,7 +13,9 @@ export class StringCalculatorService {
       return of('0');
     }
 
-    let delimiters = [','];
+    numbers = numbers.replace(/\\n/g, "\n");
+    
+    let delimiters = [',','\n'];
 
     const total = this.NumberHandler(numbers,delimiters)
     return of(total);
@@ -30,7 +32,7 @@ export class StringCalculatorService {
   isDecimal(number:string|number|BigInt):boolean{
       return (number).toString().includes('.');
   }
-  
+
   sumDecimalsAndNumbers(numbers:string[]):string{
     let decimals = numbers.filter((val)=>this.isDecimal(val));
     let integertotal = numbers.filter((val)=>!(this.isDecimal(val))).reduce((sum, num) =>BigInt(sum) + BigInt(num), BigInt(0));

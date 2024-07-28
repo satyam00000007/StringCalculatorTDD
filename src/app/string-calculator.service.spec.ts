@@ -78,6 +78,11 @@ describe('StringCalculatorService', () => {
       }); 
     });
 
+    it('should handle new lines between numbers instead of commas', () => {
+      service.add('1,2\n3').subscribe((res)=>{
+        expect(res).toBe('6')
+      }); 
+    });
 
 
 
