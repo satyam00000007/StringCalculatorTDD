@@ -25,10 +25,11 @@ export class StringCalculatorService {
       }
 
       // check for other symbols used for delimiter
-      const regex = /[\n,.\d]+/;
+      const regex = /[\n,-.\d]+/;
       
       const parts = numbers.split(regex);
       const customDelimiter = parts[0].substring(2,parts[0].length);
+      console.log(customDelimiter)
       if(!(customDelimiter) || customDelimiter.charCodeAt(0) == 45){
         return throwError(()=> new Error(`Use Custom Delimiter other than "," ,"-", "Numbers" and "\n".`));
       }
@@ -40,11 +41,15 @@ export class StringCalculatorService {
         return ((idx !=0 )&& (val?true:false) && (val?.charCodeAt(0)?val?.charCodeAt(0) != 45 :false)  && (val.trim() != customDelimiter))})
       if(nonDelimiter.length){
         return throwError(()=> new Error(`Delimiters "${customDelimiter}" not used correctly`));
-       }
+        }
 
       const parts2 = numbers.split('\n');
       numbers = parts2.slice(1).join('\n');
+    }
 
+    let negativeValues = this.checkNegativeNum(numbers,delimiters);
+    if(negativeValues){
+      return throwError(()=> new Error(`negative numbers not allowed: ${negativeValues}`));
     }
 
     const total = this.NumberHandler(numbers,delimiters)
@@ -77,6 +82,24 @@ export class StringCalculatorService {
     }
 
     return total;
+  }
+
+  checkNegativeNum(str:string,delimiters:string[]):string {
+    let negativeValues:string = "";
+
+      let nums = str.split(new RegExp(`[${delimiters.join('')}]`)).map((num)=> {
+        if(num.includes('-')){
+          let newValues = num.split('-')
+                      .map((val)=> val?"-"+val:'')
+                      .filter((val)=> Number(val) < 0)
+                      .join(", ");
+
+          negativeValues = negativeValues?negativeValues + ', '+newValues : newValues;          
+        }
+        return 0;
+      });
+
+    return negativeValues
   }
 
 }

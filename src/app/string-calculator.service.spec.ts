@@ -145,5 +145,14 @@ describe('StringCalculatorService', () => {
       });
     });
 
+    it('should throw an error for negative numbers', () => {
+      service.add('-1').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('negative numbers not allowed: -1');
+        }
+      });
+    });
+
   });
 });
