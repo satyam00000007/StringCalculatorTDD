@@ -136,5 +136,14 @@ describe('StringCalculatorService', () => {
       });
     });
 
+    it('should throw an error if custom delimiter format is not used correctly', () => {
+      service.add('//;\n1*2,3').subscribe({
+        next: () => {},
+        error: (err) => {
+          expect(() => { throw err }).toThrowError('Delimiters ";" not used correctly');
+        }
+      });
+    });
+
   });
 });

@@ -35,6 +35,13 @@ export class StringCalculatorService {
 
       delimiters.push(customDelimiter);
 
+      // check custom delemeter format
+      const nonDelimiter = parts.filter((val,idx)=>{
+        return ((idx !=0 )&& (val?true:false) && (val?.charCodeAt(0)?val?.charCodeAt(0) != 45 :false)  && (val.trim() != customDelimiter))})
+      if(nonDelimiter.length){
+        return throwError(()=> new Error(`Delimiters "${customDelimiter}" not used correctly`));
+       }
+
       const parts2 = numbers.split('\n');
       numbers = parts2.slice(1).join('\n');
 
